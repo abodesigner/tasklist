@@ -1,10 +1,10 @@
-import TaskInputForm from "./components/TaskInputForm";
+import TasksLogic from "./components/TasksLogic";
 
 function App() {
 
   return (
-    <div className="bg-white h-screen flex flex-col items-center justify-center">
-      <TaskInputForm />
+    <div className="bg-slate-900 flex flex-col items-center justify-center">
+      <TasksLogic />
     </div>
   )
 }

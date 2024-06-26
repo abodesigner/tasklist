@@ -13,6 +13,16 @@ export interface ITaskItem {
     task: ITask;
 }
 
+// TaskInputForm interface
+export interface ITaskHeader {
+    tasks: ITask[];
+    tasksCompleted: number
+}
+// TaskInputForm interface
+export interface ITaskInputForm {
+    handleAddTask: (text: string) => void;
+}
+
 // TasksList interface
 export interface ITasksList {
     // handleTaskUpdate: (updateText: string, id: number) => void;

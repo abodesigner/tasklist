@@ -1,41 +1,9 @@
-import { useState, useEffect } from "react";
-import { ITask } from "../interfaces";
-import TasksList from "./TasksList";
+import { useState } from "react";
+import { ITaskInputForm } from "../interfaces";
 
-const TaskInputForm = () => {
-
-    // Load tasks from LocalStorage
-    const loadSavedTasks = () => {
-        const data = localStorage.getItem('tasks');
-        const json = JSON.parse(data || '""')
-        if (json) {
-            return json
-        }
-        return [];
-    }
+const TaskInputForm = ({ handleAddTask }: ITaskInputForm) => {
 
     const [taskInput, setTaskInput] = useState<string>("");
-    const [tasksList, setTasksList] = useState<ITask[]>(() => loadSavedTasks());
-
-    const addTask = (text: string) => {
-        const newTask: ITask = {
-            id: Date.now(),
-            text,
-            isDone: false,
-        };
-        setTasksList([...tasksList, newTask]);
-        setTaskInput("");
-    };
-
-    const toggleTask = (id: number) => {
-        const tasks = tasksList.map(task=> {
-            if (task.id === id) {
-                return {...task, isDone: !task.isDone}
-            }
-            return task;
-        })
-        setTasksList(tasks);
-    }
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTaskInput(e.target.value);
@@ -49,33 +17,21 @@ const TaskInputForm = () => {
             alert("Please enter a value!");
             return;
         }
-        addTask(taskInput);
+        handleAddTask(taskInput);
+        setTaskInput("");
     };
-
-    const handleDeleteTask = (id: number): void => {
-        const tasks = loadSavedTasks();
-        const filteredTask = tasks.filter((task: ITask) => { return task.id !== id });
-        setTasksList(filteredTask);
-        localStorage.setItem("tasks", JSON.stringify(filteredTask));
-    }
-
-   // Update local storage whenever TODOs change
-    useEffect(() => {
-        localStorage.setItem("tasks", JSON.stringify(tasksList));
-    }, [tasksList]);
-
     return (
-        <div className="pm-8 shadow-xl border">
-            <h1 className="text-center font-bold py-4 bg-sky-600 text-white w-[full] mb-8 text-2xl">
-                Tasks List
-            </h1>
-            <form className="px-4 mb-4 font-opensans" onSubmit={handleSubmit}>
+        <div className="shadow-xl border mb-4">
+
+            <form className="px-2 py-4 font-opensans" onSubmit={handleSubmit}>
                 <input
                     type="text"
                     className="outline-none bg-transparent
-        border border-gray-500 p-2 w-[500px] text-gray mb-8 rounded
+        border border-gray-500 p-2 w-[500px] text-white mb-2 rounded
         placeholder:text-gray-300"
-                    placeholder="What would you like to do?"
+
+                    onFocus={(e) => e.target.placeholder = ""}
+                    onBlur={(e) => e.target.placeholder = "What would you like to do?"}
                     onChange={handleInputChange}
                     value={taskInput}
                 />
@@ -86,11 +42,6 @@ const TaskInputForm = () => {
                 </button>
             </form>
 
-            <TasksList
-                tasks={tasksList}
-                handleTaskRemove={handleDeleteTask}
-                handleToggleTask={toggleTask}
-                />
         </div>
     );
 };

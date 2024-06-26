@@ -4,6 +4,7 @@ const TasksList = ({ tasks, handleTaskRemove, handleToggleTask } : ITasksList ) 
   return (
 
 <div className="px-4">
+
     {
             tasks.map((task: ITask) => {
               return <TaskItem
@@ -13,6 +14,7 @@ const TasksList = ({ tasks, handleTaskRemove, handleToggleTask } : ITasksList ) 
                           handleToggleTask={() => handleToggleTask(task.id)}/>
         })
     }
+     
 </div>
   )
 }
