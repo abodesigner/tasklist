@@ -6,15 +6,14 @@ const TasksList = ({ tasks, handleTaskRemove, handleToggleTask } : ITasksList ) 
 <div className="px-4">
 
     {
-            tasks.map((task: ITask) => {
-              return <TaskItem
-                          key={task.id}
-                          task={task}
-                          handleTaskRemove={() => handleTaskRemove(task.id)}
-                          handleToggleTask={() => handleToggleTask(task.id)}/>
+        tasks ?  tasks.map((task: ITask) => {
+              return <TaskItem key={task.id} task={task}
+                               handleTaskRemove={() => handleTaskRemove(task.id)}
+                               handleToggleTask={() => handleToggleTask(task.id)}/>
         })
+          : <p className="text-gary-300">No tasks add yet</p>
     }
-     
+
 </div>
   )
 }

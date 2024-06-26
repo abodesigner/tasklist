@@ -54,7 +54,7 @@ const TasksLogic = () => {
     }, [tasksList]);
 
     return (
-        <>
+        <div className="bg-slate-900 p-4 rounded-lg">
             <TaskHeader tasks={tasksList} tasksCompleted={completedTasks} />
             <TaskInputForm handleAddTask={addTask} />
             <TasksList
@@ -62,7 +62,7 @@ const TasksLogic = () => {
                 handleTaskRemove={handleDeleteTask}
                 handleToggleTask={toggleTask}
             />
-        </>
+        </div>
     )
 }
 export default TasksLogic

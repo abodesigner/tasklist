@@ -2,7 +2,7 @@ import { ITaskHeader } from '../interfaces'
 const TaskHeader = ({ tasks, tasksCompleted }: ITaskHeader) => {
 
     return (
-        <div className="flex justify-between items-center rounded h-100px text-center font-bold p-6 bg-sky-600 text-white w-[600px]
+        <div className="flex justify-between items-center rounded-lg h-100px text-center font-bold p-6 bg-sky-600 text-white w-[600px]
                         mb-8 text-2xl">
             <h2>Tasks List</h2>
 

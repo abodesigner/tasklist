@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ITaskInputForm } from "../interfaces";
+import { CiCirclePlus } from "react-icons/ci";
 
 const TaskInputForm = ({ handleAddTask }: ITaskInputForm) => {
 
@@ -17,17 +18,21 @@ const TaskInputForm = ({ handleAddTask }: ITaskInputForm) => {
             alert("Please enter a value!");
             return;
         }
+
+        if (taskInput.length < 4) {
+            alert("Please enter minimum 5 chars");
+            return;
+        }
         handleAddTask(taskInput);
         setTaskInput("");
     };
     return (
-        <div className="shadow-xl border mb-4">
+        <div className="shadow-xl mb-4">
 
-            <form className="px-2 py-4 font-opensans" onSubmit={handleSubmit}>
+            <form className="px-2 flex items-center py-4 font-opensans" onSubmit={handleSubmit}>
                 <input
                     type="text"
-                    className="outline-none bg-transparent
-        border border-gray-500 p-2 w-[500px] text-white mb-2 rounded
+                    className="outline-none bg-transparent border border-gray-500 p-2 w-[500px] text-white  rounded
         placeholder:text-gray-300"
 
                     onFocus={(e) => e.target.placeholder = ""}
@@ -38,7 +43,7 @@ const TaskInputForm = ({ handleAddTask }: ITaskInputForm) => {
 
                 <button className="bg-gray-700 border-none p-2
                  text-white cursor-pointer rounded ml-2">
-                    Add Task
+                    <CiCirclePlus size={30} />
                 </button>
             </form>
 

@@ -3,7 +3,7 @@ import TasksLogic from "./components/TasksLogic";
 function App() {
 
   return (
-    <div className="bg-slate-900 flex flex-col items-center justify-center">
+    <div className="flex flex-col h-full items-center justify-center">
       <TasksLogic />
     </div>
   )
